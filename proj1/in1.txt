@@ -1,0 +1,3 @@
+9 doit-once msg foobar
+3 doit-once msg foo
+6 doit-once msg bar
