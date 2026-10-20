@@ -1,8 +1,9 @@
-import java.util.PriorityQueue;
-
 /**
  * Author: Sean Beckford
  */
+import java.io.*;
+import java.util.*;
+
 public class Simulation {
     private PriorityQueue<Msg> pQueue;
 

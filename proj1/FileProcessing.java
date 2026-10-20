@@ -1,10 +1,11 @@
-import java.util.PriorityQueue;
-
 /**
  * This class is for converting the file contents into
  * a LinkedListPriorityQueue.
  * Author: Sean Beckford
  */
+import java.io.*;
+import java.util.*;
+
 public class FileProcessing {
     public PriorityQueue<Msg> readFileAndConvert(String filename) {
         PriorityQueue<Msg> pQueue = new LinkedListPriorityQueue<Msg>();
