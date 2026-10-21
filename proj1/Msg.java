@@ -1,10 +1,9 @@
-import java.util.Scanner;
-
 /**
  * This class is the struct for the Msg object that will 
  * be used for the Queue.
  * Author: Sean Beckford
  */
+import java.util.*;
 
 public class Msg implements Comparable<Msg> {
     private int time;
@@ -22,16 +21,23 @@ public class Msg implements Comparable<Msg> {
     public String getEvent() { return event; }
     public String getMessage() { return message; }
 
-    public static Msg parseLine(String line) {
+    public static Msg parseLine(String line) throws Exception {
         try (Scanner lineScanner = new Scanner(line)) {
-            if (lineScanner.hasNextInt()) {
-                int time = lineScanner.nextInt();
+            int time = lineScanner.nextInt();
+            String event = lineScanner.next();
+            String type;
+            String message = "";
+
+            if (event.equals("exit")) {
+                message = "EXIT";
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
+            else {
+                type = lineScanner.next();
+                message = lineScanner.next();
+            }
+
+            return new Msg(time, event, message);
         }
-    
-        return new Msg(Integer.parseInt(parts[0]), parts[1], parts[3]);
     }
 
     public String toString() {

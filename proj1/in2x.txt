@@ -1,0 +1,4 @@
+5 doit-once msg foobar
+7 exit
+2 doit-once msg foo
+8 doit-once msg bar
