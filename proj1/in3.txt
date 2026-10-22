@@ -1,0 +1,5 @@
+1 doit-once msg BEGIN!
+8 doit-once msg HALFWAY!
+16 exit
+3 repeating 3 msg hahahaha
+1 repeating 4 msg boring
