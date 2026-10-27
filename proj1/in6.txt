@@ -1,0 +1,7 @@
+10 doit-once msg HALFWAY
+20 exit
+2 repeating 2 msg i-am-even
+20 doit-once msg FINISHLINE
+8 countdown 1 5 msg bannana
+12 doit-once msg DOZEN
+3 repeating 3 msg i-am-3-mult

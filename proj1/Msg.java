@@ -8,53 +8,36 @@ import java.util.*;
 public class Msg implements Comparable<Msg> {
     private int time;
     private String event;
-    private int repeat;
     private String message;
+    private int lineNumber;
 
-    public Msg(int time, String event, int repeat, String message) {
+    public Msg(int time, String event, String message, int lineNumber) {
         this.time = time;
         this.event = event;
-        this.repeat = repeat;
         this.message = message;
+        this.lineNumber = lineNumber;
     }
 
     // Getters
     public int getTime() { return time; }
     public String getEvent() { return event; }
-    public int getRepeat() { return time; }
     public String getMessage() { return message; }
-
-    public void setRepeat(int repeat) { this.repeat = repeat; }
-
-    public static Msg parseLine(String line) throws Exception {
-        try (Scanner lineScanner = new Scanner(line)) {
-            int time = lineScanner.nextInt();
-            String event = lineScanner.next();
-            int repeat = 0;
-            String type;
-            String message = "";
-
-            if (event.equals("exit")) {
-                message = "EXIT";
-            }
-            else {
-                if (lineScanner.hasNextInt()) {
-                    repeat = lineScanner.nextInt();
-                }
-                type = lineScanner.next();
-                message = lineScanner.next();
-            }
-
-            return new Msg(time, event, repeat, message);
-        }
-    }
+    public int getLineNumber() { return lineNumber; }
 
     public String toString() {
         return "[" + message + "]";
     }
 
-    @Override 
+    @Override
     public int compareTo(Msg other) {
-        return Integer.compare(this.time, other.time);
+        int timeComparison = Integer.compare(this.time, other.time);
+        if (timeComparison == 0 && !"exit".equals(this.event)) {
+            return Integer.compare(this.lineNumber, other.lineNumber);
+        }
+        return timeComparison;
+    }
+
+    public Msg getNext() {
+        return null;
     }
 }

@@ -1,0 +1,9 @@
+21 exit
+5 doit-once msg foobar
+2 repeating 5 msg tastes-great
+1 countdown 4 5 msg bottles
+4 countdown 5 4 msg MISSIPPIPPI
+3 repeating 7 msg less-filling
+7 doit-once msg foo
+6 doit-once msg bar
+10 doit-once msg AAA

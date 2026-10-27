@@ -13,31 +13,52 @@ public class Simulation {
         this.currentTime = 1;
     }
 
+    public String formattedTime(int time) {
+        return String.format("%03d: ", time); // This formats an integer with zero-padding to a min width of 3 digits
+    }
+
     // Run the clock until time, k (as mentioned in the spec.)
     public void runClock(int time) {
-        for (int i = currentTime; i <= time; i++) {
-            if (i < 10) {  System.out.print("00"); }
-            else if (i < 100) { System.out.print("0"); }
-            System.out.println(i + ": ");
+        for (int i = currentTime; i < time; i++) {
+            System.out.println(formattedTime(i));
         }
-
         currentTime = time;
     }
 
     public void runSimulation(boolean cOption) {
         System.out.println("Simulation");
+        
+        int lastTime = 0;        
         while (pQueue.size() > 0) {
             Msg m = pQueue.dequeue();
 
-            if (!cOption && m.getTime() != currentTime) { runClock(m.getTime()); }
-            else if (!cOption) { System.out.print(" " + m.toString()); }
-            System.out.print(m.toString());
-            
-            if (m.getEvent().equals("exit")) { break; }
-            else if (m.getEvent().equals("repeating")) {
-                pQueue.enqueue(new Msg(currentTime + m.getRepeat(), "repeating", m.getRepeat(), m.getMessage()));
+            if (m.getTime() != lastTime) {
+                if (lastTime != 0) {
+                    System.out.println();
+                }
+                if (!cOption) {
+                    runClock(m.getTime());
+                }
+                System.out.print(formattedTime(m.getTime()) + m.toString());
+
+                lastTime = m.getTime();
+                currentTime = m.getTime() + 1;
             }
-        } 
+            else {
+                System.out.print(m.toString());
+            }
+            
+            // Exit message (if one of the Msg objects)
+            if (m.getEvent().equals("exit")) { 
+                break; 
+            }
+            
+            Msg next = m.getNext();
+            if (next != null) {
+                pQueue.enqueue(next);
+            }
+        }
+        System.out.println(); 
         System.out.println("Goodbye");
     }
 }

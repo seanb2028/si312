@@ -22,7 +22,7 @@ public class Driver {
             // Initiate linked list based on file data
             FileProcessing fp = new FileProcessing();
             PriorityQueue<Msg> pQueue = fp.readFileAndConvert(cOption ? args[1] : args[0]);
-            
+
             // Start simulation
             Simulation s = new Simulation(pQueue);
             s.runSimulation(cOption);
