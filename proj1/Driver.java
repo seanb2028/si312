@@ -10,7 +10,7 @@ public class Driver {
         boolean cOption = false;
 
         // Check command line usage
-        if (args.length == 0 || (args.length > 1 && !args[0].equals("-c"))) {
+        if (args.length == 0 || (args.length > 1 && !args[0].equals("-c") || (args.length == 1 && args[0].equals("-c")))) {
             System.out.println("usage: java Driver [-c] <file>");
             System.exit(1);
         }
@@ -26,9 +26,10 @@ public class Driver {
             // Start simulation
             Simulation s = new Simulation(pQueue);
             s.runSimulation(cOption);
+        } catch (FileNotFoundException f) {
+            System.out.print(f.getMessage());
         } catch (Exception e) {
             System.out.print(e);
-            System.exit(1);
         }
     }
 }

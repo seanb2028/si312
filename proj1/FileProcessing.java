@@ -44,11 +44,18 @@ public class FileProcessing {
             PriorityQueue<Msg> pQueue = new LinkedListPriorityQueue<Msg>();
 
             while (file.hasNextLine()) {
+                String line = file.nextLine();
+                // Check if there's a blank line
+                if (line.isEmpty()) {
+                    continue;
+                }
                 // Add new Msg object to Linked List pQueue
-                pQueue.enqueue(parseLine(file.nextLine(), pQueue.size()));
+                pQueue.enqueue(parseLine(line, pQueue.size()));
             }
             
             return pQueue;
+        } catch (FileNotFoundException f) {
+            throw new FileNotFoundException("Error: File '" + filename +"' not found!");
         }
     }
 }
